@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ARにおけるオブジェクトの認識テスト</title>
+    <style>
+      html,body{
+        margin: 0;
+        height:100%;
+      }
+      #c {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      #chgButton {
+				display: block;
+        position:absolute;
+				bottom: 20px;
+				left: 10%;
+				width:30%;
+				height: 50px;
+				z-index:100;
+				text-align: center;
+  			border: 3px solid #333333;
+      }
+			#instButton {
+				display: block;
+        position:absolute;
+				bottom: 20px;
+				right: 10%;
+				width:30%;
+				height: 50px;
+				z-index:100;
+				text-align: center;
+  			border: 3px solid #dc143c;
+			}
+      #pickedCheck {
+				display: block;
+        position:absolute;
+				top: 20px;
+				right: 10%;
+				width:30%;
+				height: 50px;
+				z-index:100;
+				text-align: center;
+  			border: 3px solid #49ec09;
+			}
+      #logCheck {
+				display: block;
+        position:absolute;
+				top: 20px;
+				left: 10%;
+				width:30%;
+				height: 60%;
+				z-index:100;
+				text-align: center;
+  			border: 3px solid #49ec09;
+			}
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+  </body>
+<script type="module" src="./test5.js"></script>
+</html>
