@@ -2,7 +2,6 @@ import * as THREE from '../three.js-master/build/three.module.js';
 import { GLTFLoader } from '../three.js-master/examples/jsm/loaders/GLTFLoader.js';
 import { ARButton } from '../three.js-master/examples/jsm/webxr/ARButton.js';
 
-
 class City{
   constructor(height,width){
     this.width = width;
@@ -18,16 +17,46 @@ class City{
     for(let h=0;h<this.height;h++){
       this.field[h] = [];
       for(let w=0;w<this.width;w++){
-        //this.field[h][w] = new Empty("empty",1,1,"S",cnt);
         this.editCell(h,w,0,"empty",1,1,"S",cnt);
         cnt = cnt+1;
       }
     }
   }
-  editCell(h,w,ObjType,name,hsize,wsize,direction,group){
+  editCell(y,x,ObjType,name,height,width,direction,group){
     // ObjType = 0:Empty, 1:Building, 2:Road
     console.log("edit cell");
     let msFlag = false;
+
+    for (let i=y;i<y+height;i++){
+      for (let j=x;j<x+width;j++){
+        if (ObjType == 0){
+          if(msFlag == false){
+            this.field[i][j] = new Empty(name,height,width,direction,group,"master");
+            msFlag = true;
+          }else{
+            this.field[i][j] = new Empty(name,height,width,direction,group,"slave");
+          }
+        }else if(ObjType == 1){
+          if(msFlag == false){
+            this.field[i][j] = new Building(name,height,width,direction,group,"master");
+            msFlag = true;
+          }else{
+            this.field[i][j] = new Building(name,height,width,direction,group,"slave");
+          }
+        }else if(ObjType == 2){
+          if(msFlag == false){
+            this.field[i][j] = new Road(name,height,width,direction,group,"master");
+            msFlag = true;
+          }else{
+            this.field[i][j] = new Road(name,height,width,direction,group,"slave");
+          }
+        }else{
+          console.log("city.editCell ObjType error : cant use number %d . valiable num is 0,1,2.", ObjType);
+        }
+      }
+    }
+
+    /*
     if (ObjType == 0){
       for (let i=h;i<h+hsize;i++){
         for (let j=w;j<w+wsize;j++){
@@ -39,8 +68,6 @@ class City{
           }
         }
       }
-      
-      //this.field[h][w] = new Empty(name,hsize,wsize,direction,group,"master");
     }else if(ObjType == 1){
       for (let i=h;i<h+hsize;i++){
         for (let j=w;j<w+wsize;j++){
@@ -66,6 +93,7 @@ class City{
     }else{
       console.log("city.editCell ObjType error : cant use number %d . valiable num is 0,1,2.", ObjType);
     }
+    */
   }
   connect(){
   }
@@ -125,67 +153,8 @@ class Building extends Cell{}
 class Road extends Cell{}
 class Empty extends Cell{}
 
-/*
-class load3DModel{
-  constructor(){
-    this.nameList = new Map([
-      ['building','../model/test.gltf'],
-      ['house1','../model/TestHuman.gltf']
-    ]);
-  }
-  calcPos(lenH,lenW,posH,posW){
-    let fieldCenterH = (lenH/2) + 0.5;
-    let fieldCenterW = (lenW/2) + 0.5;
-    let h = posH - fieldCenterH + 1;
-    let w = posW - fieldCenterW + 1;
-    return [h,w];
-  }
-  load(cell,lenH,lenW,posH,posW){
-    let pos = this.calcPos(lenH,lenW,posH,posW);
-    let obj;
-    //console.log(cell.getName());
-    if(cell.getName() == 'empty'){
-      obj = this.loadCell(pos);
-    }else{
-      let objName = this.nameList.get(cell.getName());
-      console.log(objName);
-      obj = this.loadGltf(objName,pos);
-      console.log(this.model);
-    }
-    //console.log(obj);
-    return obj;
-  }
-  loadCell(pos){
-    let boxWidth = 0.95;
-    let boxHeight = 0.02;
-    let boxDepth = 0.95;
-    let geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    let material = new THREE.MeshBasicMaterial({color: 0x44aa88});
-    let cellmodel = new THREE.Mesh(geometry, material);
-    cellmodel.position.set(pos[0],0,pos[1]);
-    //console.log(cellmodel);
-    return cellmodel;
-  }
-  loadGltf(name,pos){
-    const gltfLoader = new GLTFLoader();
-    let model;
-    let gltf;
-    let gltfModel;
-    console.log(name);
-    gltfLoader.load(name,function(data){
-      gltf = data;
-      gltfModel = gltf.scene;
-      gltfModel.position.set(pos[0],0,pos[1]);
-      console.log(gltfModel);
-    });
-    console.log(gltf);
-  }
-}
-*/
-
 class View{
   constructor(canvas){
-    //this.canvas = document.querySelector('#c');
     this.renderer = new THREE.WebGLRenderer({canvas});
     this.scene = new THREE.Scene();
     this.fov = 60;
@@ -196,12 +165,9 @@ class View{
     this.color = 0xF8F8FF;
     this.intensity = 1;
     this.light = new THREE.DirectionalLight(this.color, this.intensity);
-    //this.loadModel = new load3DModel();
     this.gltfLoader = new GLTFLoader();
-    this.nameList = new Map([
-      ['building','../model/TestCar.gltf'],
-      ['house1','../model/TestHuman.gltf']
-    ]);
+    this.nameList = {'building':'../model/test.gltf','house1':'../model/TestHuman.gltf'};
+    this.pointCenter = [0,0]; //x,y
   }
   initView(){
     this.scene.add(this.light);
@@ -215,29 +181,23 @@ class View{
   viewField(field){
     for(let i=0;i<field.length;i++){
       for(let j=0;j<field[i].length;j++){
-        //console.log(field[i][j]);
-        //let obj = this.loadModel.load(field[i][j],field.length,field[i].length,i,j);
-        //console.log(obj);
         this.load(field[i][j],field.length,field[i].length,i,j);
-        //this.scene.add(obj);
       }
     }
   }
   calcPos(lenH,lenW,posH,posW){
     let fieldCenterH = (lenH/2) + 0.5;
     let fieldCenterW = (lenW/2) + 0.5;
-    let h = posH - fieldCenterH + 1;
-    let w = posW - fieldCenterW + 1;
+    let h = posH - fieldCenterH+1+pointCenter[1];
+    let w = posW - fieldCenterW+1+pointCenter[0];
     return [h,w];
   }
   load(cell,lenH,lenW,posH,posW){
     let pos = this.calcPos(lenH,lenW,posH,posW);
-    //console.log(cell.getName());
     if(cell.getName() == 'empty'){
       this.loadCell(pos);
     }else{
-      let objName = this.nameList.get(cell.getName());
-      //console.log(objName);
+      let objName = this.nameList[cell.getName()];
       this.loadGltf(objName,pos);
     }
   }
@@ -246,7 +206,7 @@ class View{
     let boxHeight = 0.02;
     let boxDepth = 0.95;
     let geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    let col = 0xFF0000 + pos[0]*10*30 + pos[1]*30;
+    let col = 0xFF0000+pos[1]*15;
     let material = new THREE.MeshBasicMaterial({color: col});
     let cellmodel = new THREE.Mesh(geometry, material);
     cellmodel.position.set(pos[0],0,pos[1]);
@@ -254,7 +214,6 @@ class View{
     this.scene.add(cellmodel);
   }
   loadGltf(name,pos){
-    //console.log(name);
     this.gltfLoader.load(name,(data)=>{
       const gltf = data;
       const gltfModel = gltf.scene;
@@ -264,6 +223,11 @@ class View{
       this.scene.add(gltfModel);
     });
   }
+}
+
+class Viewer_AR extends View{}
+
+class Viewer_2D extends View{
   render(){
     let cvs = this.renderer.domElement;
     let pixelRatio = window.devicePixelRatio;
@@ -275,24 +239,21 @@ class View{
       this.camera.aspect = cvs.clientWidth / cvs.clientHeight;
       this.camera.updateProjectionMatrix();
     }
-    
-    //this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(() => { this.render(); });
     this.renderer.render(this.scene, this.camera);
   }
 }
 
 function init(){
-  const city = new City(4,4);
+  const city = new City(2,2);
   city.initField();
   
-  const view = new View(document.querySelector('#c'));
+  const view = new Viewer_2D(document.querySelector('#c'));
   view.initView();
   view.viewField(city.getField());
-  city.editCell(1,1,1,'building',1,1,"S",100);
+  city.editCell(1,0,1,'building',1,1,"S",100);
 
   view.viewField(city.getField());
-  //view.render();
   view.render();
   
 }
