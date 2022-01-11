@@ -135,8 +135,8 @@ function animate() {
 }
 
 function render( timestamp, frame ) {
-
   if ( frame ) {
+    changeObjButton.innerHTML = "rendering";
     const referenceSpace = renderer.xr.getReferenceSpace();
     const session = renderer.xr.getSession();
 
