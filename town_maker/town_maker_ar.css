@@ -17,27 +17,18 @@ body{
   position:absolute;
   top: 70%;
   right: 2%;
-  width:38%;
-  height: 50px;
-  z-index:100;
-  text-align: center;
-  border: 3px solid #2e8b57;
-  background: #3cb371;
-  color: #fff;
+  height:57px;
+  width:auto;
 }
 #updateObjectButton {
   display: block;
   position:absolute;
   top: 70%;
   right: 2%;
-  width:38%;
-  height: 50px;
-  z-index:100;
-  text-align: center;
-  border: 3px solid #1e90ff;
-  background: #00bfff;
-  color: #fff;
+  height:57px;
+  width:auto
 }
+
 #nowCollectObject {
   margin: 3px;
   width: 120px;
