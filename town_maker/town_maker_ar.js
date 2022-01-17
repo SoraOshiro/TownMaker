@@ -215,7 +215,7 @@ class View{
     let col = 0x008000;
     let material = new THREE.MeshBasicMaterial({color: col});
     let cellmodel = new THREE.Mesh(geometry, material);
-    cellmodel.position.set(pos[0],pos[1]+0.05,pos[2]);
+    cellmodel.position.set(pos[0],pos[1]+0.075,pos[2]);
     //cellmodel.scale.set(0.25,0.25,0.25);
     cellmodel.name = [h,w];
     //console.log(cellmodel.name);
@@ -239,7 +239,7 @@ class View{
     this.gltfLoader.load(name,(data)=>{
       const gltf = data;
       const gltfModel = gltf.scene;
-      gltfModel.position.set(pos[0],pos[1]+0.08,pos[2]);
+      gltfModel.position.set(pos[0],pos[1]+0.075,pos[2]);
       gltfModel.scale.set(modelScale[0],modelScale[1],modelScale[2]);
       if(angle != 0){
         gltfModel.rotation.set(0,Math.PI*angle/180,0);
