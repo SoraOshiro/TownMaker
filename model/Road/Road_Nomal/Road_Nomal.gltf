@@ -17,7 +17,11 @@
             "mesh" : 0,
             "name" : "Road_Normal",
             "translation" : [
+<<<<<<< HEAD
+                0,
+=======
                 -4,
+>>>>>>> main
                 0,
                 0
             ]
@@ -193,7 +197,11 @@
     "buffers" : [
         {
             "byteLength" : 700,
+<<<<<<< HEAD
+            "uri" : "Road_Nomal.bin"
+=======
             "uri" : "Road.bin"
+>>>>>>> main
         }
     ]
 }

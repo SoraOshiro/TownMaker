@@ -1,0 +1,97 @@
+html{
+  margin: 0;
+  height:100%;
+}
+body{
+  margin: 0;
+  height:100%;
+  font-family:"游ゴシック","ヒラギノ角ゴ ProN","メイリオ","MS Pゴシック",sans-serif;
+}
+#c {
+  width: 100%;
+  height: 80%;
+  display: block;
+}
+#setFieldButton {
+  display: block;
+  position:absolute;
+  bottom: 20px;
+  right: 10%;
+  width:30%;
+  height: 50px;
+  z-index:100;
+  text-align: center;
+  border: 3px solid #dc143c;
+}
+#updateObjectButton {
+  display: block;
+  position:absolute;
+  bottom: 20px;
+  right: 10%;
+  width:30%;
+  height: 50px;
+  z-index:100;
+  text-align: center;
+  border: 3px solid #333333;
+}
+
+.nav-wrap {
+  position: relative;
+  height: 20%;
+}
+.scroll-nav {
+  overflow-x: auto;
+  background: #00bfff;
+  border: 1px solid #ddd;
+  height: 70%;
+}
+.scroll-nav::-webkit-scrollbar {
+  display: none;
+}
+.scroll-nav ul {
+  display: flex;
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  list-style: none;
+}
+.scroll-nav ul > li {
+  white-space: nowrap;
+  padding: 0 8px;
+}
+.scroll-nav ul li:hover {
+  background: #1e90ff;
+}
+.scroll-nav ul li div{
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+}
+.angle-nav {
+  overflow-x: auto;
+  background: #00bfff;
+  border: 1px solid #ddd;
+  height: 25%;
+}
+.angle-nav::-webkit-scrollbar {
+  display: none;
+}
+.angle-nav ul {
+  display: flex;
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  list-style: none;
+}
+.angle-nav ul > li {
+  white-space: nowrap;
+  padding: 0 8px;
+}
+.angle-nav ul li:hover {
+  background: #1e90ff;
+}
+.angle-nav ul li div{
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+}

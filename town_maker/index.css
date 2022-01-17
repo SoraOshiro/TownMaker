@@ -1,0 +1,71 @@
+html{
+  margin: 0;
+  height:100%;
+}
+body{
+  margin: 0;
+  height:100%;
+  font-family:"游ゴシック","ヒラギノ角ゴ ProN","メイリオ","MS Pゴシック",sans-serif;
+  background: #87ceeb;
+}
+li{
+  list-style: none;
+}
+.title{
+  position: absolute;
+  top: 5%;
+  width:100%;
+  text-align:center;
+}
+#title_img{
+  width:50%;
+  height:50%;
+}
+
+.select_mode{
+  width:100%;
+  position: absolute;
+  text-align:center;
+  top: 48%;
+}
+.select_mode ul{
+  padding: 0;
+}
+.select_mode img{
+  width:20%;
+  height:20%;
+}
+
+.footer{
+  width:100%;
+  position: absolute;
+  bottom: 0%;
+  color: #fff;
+  text-align: end;
+}
+.footer p{
+  margin: 10px;
+}
+@media screen and (max-width: 480px) {
+  .title{
+    position: absolute;
+    top: 10%;
+    width:100%;
+    text-align:center;
+  }
+  #title_img{
+    width:90%;
+    height:90%;
+  }
+  
+  .select_mode{
+    width:100%;
+    position: absolute;
+    text-align:center;
+    top: 35%;
+  }
+  .select_mode img{
+    width:65%;
+    height:65%;
+  }
+}
