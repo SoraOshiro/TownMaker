@@ -17,15 +17,9 @@
             "mesh" : 0,
             "name" : "Road_T-junc",
             "translation" : [
-<<<<<<< HEAD
                 0,
                 0,
                 0
-=======
-                4,
-                0,
-                4
->>>>>>> main
             ]
         }
     ],

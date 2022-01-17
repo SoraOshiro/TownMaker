@@ -17,15 +17,9 @@
             "mesh" : 0,
             "name" : "Road_None",
             "translation" : [
-<<<<<<< HEAD
                 0,
                 0,
                 0
-=======
-                -4,
-                0,
-                4
->>>>>>> main
             ]
         }
     ],
@@ -122,11 +116,7 @@
     "buffers" : [
         {
             "byteLength" : 140,
-<<<<<<< HEAD
             "uri" : "Road_None.bin"
-=======
-            "uri" : "Road.bin"
->>>>>>> main
         }
     ]
 }
